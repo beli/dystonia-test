@@ -1,17 +1,19 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
 
-const programs = await getCollection('programs');
+const programs = await getCollection("programs");
 // Sort by order field
-const sortedPrograms = programs.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+const sortedPrograms = programs.sort(
+  (a, b) => (a.data.order || 99) - (b.data.order || 99),
+);
 
 const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title="Programs" currentPath="/programs">
   <div class="section-nav">
-    <a href={`${base}programs`} class="active">Programs Overview</a>
+    <a href={`${base}programs`} class="active">Overview</a>
     <a href={`${base}programs/free-first-consultation`}>Free Consultation</a>
     <a href={`${base}programs/the-splint`}>Splints I Use</a>
     <a href={`${base}programs/program-option-1`}>Program Option 1</a>
@@ -21,16 +23,22 @@ const base = import.meta.env.BASE_URL;
 
   <article>
     <h1>Retraining Programs & Support</h1>
-    <p>I offer several options to help musicians retrain their motor control, manage symptoms, and design orthotics to bypass focal hand dystonia blocks.</p>
-    
+    <p>
+      I offer several options to help musicians retrain their motor control,
+      manage symptoms, and design orthotics to bypass focal hand dystonia
+      blocks.
+    </p>
+
     <h2>Options & Resources</h2>
     <div class="card-grid">
-      {sortedPrograms.map(program => (
-        <a href={`${base}programs/${program.id}`} class="card">
-          <h3>{program.data.title}</h3>
-          <p>{program.data.description}</p>
-        </a>
-      ))}
+      {
+        sortedPrograms.map((program) => (
+          <a href={`${base}programs/${program.id}`} class="card">
+            <h3>{program.data.title}</h3>
+            <p>{program.data.description}</p>
+          </a>
+        ))
+      }
     </div>
   </article>
 </Layout>
