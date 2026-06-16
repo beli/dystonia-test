@@ -1,10 +1,10 @@
 ---
-import { getCollection, render } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
-  const entries = await getCollection('programs');
-  return entries.map(entry => ({
+  const entries = await getCollection("programs");
+  return entries.map((entry) => ({
     params: { slug: entry.id },
     props: { entry },
   }));
@@ -16,20 +16,43 @@ const { Content } = await render(entry);
 const base = import.meta.env.BASE_URL;
 ---
 
-<Layout title={entry.data.title} description={entry.data.description} currentPath="/programs">
+<Layout
+  title={entry.data.title}
+  description={entry.data.description}
+  currentPath="/programs"
+>
   <div class="section-nav">
-    <a href={`${base}programs`}>Programs Overview</a>
-    <a href={`${base}programs/free-first-consultation`} class={entry.id === 'free-first-consultation' ? 'active' : ''}>Free Consultation</a>
-    <a href={`${base}programs/the-splint`} class={entry.id === 'the-splint' ? 'active' : ''}>Splints I Use</a>
-    <a href={`${base}programs/program-option-1`} class={entry.id === 'program-option-1' ? 'active' : ''}>Program Option 1</a>
-    <a href={`${base}programs/program-option-2`} class={entry.id === 'program-option-2' ? 'active' : ''}>Program Option 2</a>
-    <a href={`${base}programs/coping-without-retraining`} class={entry.id === 'coping-without-retraining' ? 'active' : ''}>Coping Options</a>
+    <a href={`${base}programs`}>Overview</a>
+    <a
+      href={`${base}programs/free-first-consultation`}
+      class={entry.id === "free-first-consultation" ? "active" : ""}
+      >Free Consultation</a
+    >
+    <a
+      href={`${base}programs/the-splint`}
+      class={entry.id === "the-splint" ? "active" : ""}>Splints I Use</a
+    >
+    <a
+      href={`${base}programs/program-option-1`}
+      class={entry.id === "program-option-1" ? "active" : ""}
+      >Program Option 1</a
+    >
+    <a
+      href={`${base}programs/program-option-2`}
+      class={entry.id === "program-option-2" ? "active" : ""}
+      >Program Option 2</a
+    >
+    <a
+      href={`${base}programs/coping-without-retraining`}
+      class={entry.id === "coping-without-retraining" ? "active" : ""}
+      >Coping Options</a
+    >
   </div>
 
   <article>
     <h1>{entry.data.title}</h1>
     <Content />
-    
+
     <div style="margin-top: 2rem;">
       <a href={`${base}contact`} class="btn">Ask About This Option</a>
     </div>
