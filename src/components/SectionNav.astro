@@ -1,0 +1,29 @@
+---
+interface LinkItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  links: LinkItem[];
+}
+
+const { links } = Astro.props;
+const pathname = Astro.url.pathname;
+
+// Helper to normalize paths for comparison (e.g., ignore trailing slashes)
+const isLinkActive = (href: string) => {
+  const normalize = (path: string) => path.replace(/\/$/, "");
+  return normalize(pathname) === normalize(href);
+};
+---
+
+<div class="section-nav">
+  {
+    links.map((link) => (
+      <a href={link.href} class={isLinkActive(link.href) ? "active" : ""}>
+        {link.label}
+      </a>
+    ))
+  }
+</div>

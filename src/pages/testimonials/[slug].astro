@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import SectionNav from "../../components/SectionNav.astro";
 
 export async function getStaticPaths() {
   const entries = await getCollection("testimonials");
@@ -14,6 +15,22 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 
 const base = import.meta.env.BASE_URL;
+
+const testimonialLinks = [
+  { label: "Overview", href: `${base}testimonials` },
+  {
+    label: "Right Hand Index Finger",
+    href: `${base}testimonials/classical-guitarist-index-finger-fd`,
+  },
+  {
+    label: "Left Fretting Hand",
+    href: `${base}testimonials/guitarist-left-fretting-hand-dystonia`,
+  },
+  {
+    label: "Fretting Hand Recovery",
+    href: `${base}testimonials/guitarist-fretting-hand-dystonia-recovery`,
+  },
+];
 ---
 
 <Layout
@@ -21,26 +38,7 @@ const base = import.meta.env.BASE_URL;
   description={entry.data.description}
   currentPath="/testimonials"
 >
-  <div class="section-nav">
-    <a href={`${base}testimonials`}>Overview</a>
-    <a
-      href={`${base}testimonials/classical-guitarist-index-finger-fd`}
-      class={entry.id === "classical-guitarist-index-finger-fd" ? "active" : ""}
-      >Right Hand Index Finger</a
-    >
-    <a
-      href={`${base}testimonials/guitarist-left-fretting-hand-dystonia`}
-      class={entry.id === "guitarist-left-fretting-hand-dystonia"
-        ? "active"
-        : ""}>Left Fretting Hand</a
-    >
-    <a
-      href={`${base}testimonials/guitarist-fretting-hand-dystonia-recovery`}
-      class={entry.id === "guitarist-fretting-hand-dystonia-recovery"
-        ? "active"
-        : ""}>Fretting Hand Recovery</a
-    >
-  </div>
+  <SectionNav links={testimonialLinks} />
 
   <article>
     <h1>{entry.data.title}</h1>
