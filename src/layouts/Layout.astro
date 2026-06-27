@@ -74,27 +74,33 @@ const base = import.meta.env.BASE_URL;
             <li>
               <a
                 href={`${base}about/my-story`}
-                class={isActive("/about") ? "active" : ""}>About</a>
+                class={isActive("/about") ? "active" : ""}>About</a
+              >
             </li>
             <li>
-              <a href={`${base}blog/articles`} class={isActive("/blog") ? "active" : ""}
-                >Blog</a>
+              <a
+                href={`${base}blog/articles`}
+                class={isActive("/blog") ? "active" : ""}>Blog</a
+              >
             </li>
             <li>
               <a
                 href={`${base}testimonials`}
                 class={isActive("/testimonials") ? "active" : ""}
-                >Testimonials</a>
+                >Testimonials</a
+              >
             </li>
             <li>
               <a
                 href={`${base}programs`}
-                class={isActive("/programs") ? "active" : ""}>Programs</a>
+                class={isActive("/programs") ? "active" : ""}>Programs</a
+              >
             </li>
             <li>
               <a
                 href={`${base}contact`}
-                class={isActive("/contact") ? "active" : ""}>Contact</a>
+                class={isActive("/contact") ? "active" : ""}>Contact</a
+              >
             </li>
           </ul>
         </nav>
@@ -153,7 +159,9 @@ const base = import.meta.env.BASE_URL;
           >
             <circle cx="12" cy="10" r="4"></circle>
             <path d="M2 18h20"></path>
-            <path d="M12 2v2M5.22 5.22l1.42 1.42M18.78 5.22l-1.42 1.42M2 10h2M20 10h2"></path>
+            <path
+              d="M12 2v2M5.22 5.22l1.42 1.42M18.78 5.22l-1.42 1.42M2 10h2M20 10h2"
+            ></path>
           </svg>
         </button>
       </div>
@@ -180,9 +188,12 @@ const base = import.meta.env.BASE_URL;
       const toggle = document.getElementById("theme-toggle");
       if (toggle) {
         toggle.addEventListener("click", () => {
-          const currentTheme = localStorage.getItem("theme") || 
-            (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-          
+          const currentTheme =
+            localStorage.getItem("theme") ||
+            (window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light");
+
           let nextTheme = "light";
           if (currentTheme === "light") {
             nextTheme = "dark";
@@ -233,13 +244,13 @@ const base = import.meta.env.BASE_URL;
 
   /* Twilight Theme overrides */
   html.twilight {
-    --bg: #eae2d5;        /* Darker warm cream / sepia paper */
-    --text: #2c221a;      /* Deep coffee brown */
-    --text-muted: #5e5247;/* Darker warm gray-brown */
-    --accent: #b45309;    /* Rich amber/gold */
+    --bg: #eae2d5; /* Darker warm cream / sepia paper */
+    --text: #2c221a; /* Deep coffee brown */
+    --text-muted: #5e5247; /* Darker warm gray-brown */
+    --accent: #b45309; /* Rich amber/gold */
     --accent-hover: #9a3412; /* Deep terracotta */
-    --border: #dbcfbd;    /* Soft warm sand border */
-    --surface: #f3ece0;   /* Creamy warm ivory surface */
+    --border: #dbcfbd; /* Soft warm sand border */
+    --surface: #f3ece0; /* Creamy warm ivory surface */
     --header-bg: #dfd5c5; /* Cozy sand header */
   }
 
@@ -264,7 +275,7 @@ const base = import.meta.env.BASE_URL;
   header {
     border-bottom: 1px solid var(--border);
     background-color: var(--header-bg);
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 1rem 0.5rem;
     transition:
       background-color 0.3s ease,
       border-color 0.3s ease;
