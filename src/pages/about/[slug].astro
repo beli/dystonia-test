@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import SectionNav from '../../components/SectionNav.astro';
+import { getSectionNavigation } from '../../utils/navigation';
 
 export async function getStaticPaths() {
   const entries = await getCollection('about');
@@ -16,10 +17,7 @@ const { Content } = await render(entry);
 
 const base = import.meta.env.BASE_URL;
 
-const aboutLinks = [
-  { label: 'My Story', href: `${base}about/my-story` },
-  { label: 'My Approach', href: `${base}about/my-approach` },
-];
+const { links: aboutLinks, nextEntry } = await getSectionNavigation('about', entry.id, `${base}about`);
 ---
 
 <Layout title={entry.data.title} description={entry.data.description} currentPath={`/about/${entry.id}`}>
@@ -30,8 +28,8 @@ const aboutLinks = [
     <Content />
     
     <div style="margin-top: 2rem;">
-      {entry.id === 'my-story' ? (
-        <a href={`${base}about/my-approach`} class="btn">Learn About My Approach &rarr;</a>
+      {nextEntry ? (
+        <a href={`${base}about/${nextEntry.id}`} class="btn">Learn About {nextEntry.data.title} &rarr;</a>
       ) : (
         <a href={`${base}programs`} class="btn">View Retraining Programs</a>
       )}

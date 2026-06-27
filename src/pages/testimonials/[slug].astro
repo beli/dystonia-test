@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import SectionNav from "../../components/SectionNav.astro";
+import { getSectionNavigation } from "../../utils/navigation";
 
 export async function getStaticPaths() {
   const entries = await getCollection("testimonials");
@@ -16,21 +17,7 @@ const { Content } = await render(entry);
 
 const base = import.meta.env.BASE_URL;
 
-const testimonialLinks = [
-  { label: "Overview", href: `${base}testimonials` },
-  {
-    label: "Right Hand Index Finger",
-    href: `${base}testimonials/classical-guitarist-index-finger-fd`,
-  },
-  {
-    label: "Left Fretting Hand",
-    href: `${base}testimonials/guitarist-left-fretting-hand-dystonia`,
-  },
-  {
-    label: "Fretting Hand Recovery",
-    href: `${base}testimonials/guitarist-fretting-hand-dystonia-recovery`,
-  },
-];
+const { links: testimonialLinks } = await getSectionNavigation('testimonials', entry.id, `${base}testimonials`, true);
 ---
 
 <Layout
