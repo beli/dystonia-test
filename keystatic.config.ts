@@ -4,8 +4,11 @@ export default config({
   ui: {
     brand: { name: 'Dystonia Retraining' },
   },
-  storage: {
-    kind: 'local',
+  storage: import.meta.env.PROD || process.env.NODE_ENV === 'production'
+    ? { kind: 'cloud' } 
+    : { kind: 'local' },
+  cloud: {
+    project: 'focal-dystonia/dystonia-test',
   },
   collections: {
     blog: collection({
